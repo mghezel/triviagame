@@ -26,7 +26,7 @@
 			{q:"game of thrones is shown on?",answer:["Netflix","Amazon","HBO","Chenel 2"]},
 			{q:"where spain is located?",answer:["Europe","Americas","AsiaPacific","MiddleEast"]}],
 
-			number: 8,
+			number: 5,
 			correctAnswers: 0,
 			wrongAnswers: 0,
 			unAnswered: 0
@@ -52,7 +52,7 @@ $(document).ready(function () {
 	      //  Once number hits zero...
 	      if (questions.number === 0) {
 	          stop();
-	          //handleClick();
+	          handleClick();
 	        //submitForm();		        	   
 	      }
 
@@ -77,36 +77,45 @@ $(document).ready(function () {
 				
 			 var answer=questions.qs[i].answer[0];
 			 var idValue=questions.qs[i].answer[j];
-			 //var par =$("<p>");
-			 //par.append(questions.qs[i]);
-
 		     buttonDiv.append('<input type="radio" id= "'+idValue+'" value= "'+answer+'" name="radio_group'+j+i+'">'+questions.qs[i].answer[j]+'</input>');
 			}
 
-	    	//$("#radio_container").append(par);
 	    	$("#radio_container").append(buttonDiv);
 			}
 		}
 
-		function handleClick(rightAnswer,selectedValue,radioSelected){   
-	
-		  if (radioSelected =="true"){
-		   
-			   if (rightAnswer == selectedValue){
+		function handleClick(rightAnswer,selectedValue){   
+
+			//var buttonDiv = $("<div>"); 
+			/*var counter = 0;     
+			          
+			for(var i = 0; i<5; i++) {
+				counter=0;
+				console.log($("input:radio:checked").val());
+				for (var j=0; j<4; j++){
+					
+					//console.log($('<input name="radio_group'+j+i+'">'));
+					if ($('<input name="radio_group'+j+i+'">').unchecked == "true"){
+						
+							counter++;
+							console.log(counter);
+					}
+				}
+
+				if (counter==4){
+					questions.unAnswered++;
+				}				
+
+			}*/
+
+			
+				if (rightAnswer == selectedValue){
 					questions.correctAnswers++;
 				}
 
-				else {
+				else if(rightAnswer != selectedValue){
 					questions.wrongAnswers++;
 				}
-		    }
-
-			else  {
-
-				questions.unAnswered++;
-
-			}
-
 			
 
 			$("#correct").html("<h3> correct answers" + questions.correctAnswers + "</h3>");
@@ -118,25 +127,34 @@ $(document).ready(function () {
 		run();
 
 		$("input[type='radio']").on('change', function () {
-			
-    		//$("input[type='radio']:checked").each(function() {
+			/*for(var i=0; i<5; i++){
+				for(var j=0;j<4; j++){
+					var inputName = "radio_group" +j+i;  
+					console.log($("label[for='"+inputName+"']").text());
+
+    				var selectedValue = $("input[name="+ inputName +"]:checked").val();
+    				
+    				//handleClick(selectedValue);
+    				
+    			}
+    		}*/
+    		
+    		$("input[type='radio']:checked").each(function() {
         		var idVal = $(this).attr("value");
         		var selectedVal = $(this).attr("id");
         		
-        		if ($("input[type='radio']:checked") == true){
-        			radioSelected = "true";        			
-        		} 
-        		else{
-        			radioSelected = "false";        			
-        		} 
-        		  
-        		 handleClick(idVal,selectedVal,radioSelected);
-        		
-        		
-    		//});
-  
+			       // console.log($(this).attr('label').text());
+			     
+        		//var textVal =$(this).attr("label").text();
+        		//handleClick(idVal,selectedVal);
+        		console.log(idVal,selectedVal);
+        		//alert(idVal);
+    		});
+
      		
-        });
+         });
+
+
 
 });		
 			      
