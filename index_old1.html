@@ -88,26 +88,24 @@ $(document).ready(function () {
 			}
 		}
 
-		function handleClick(rightAnswer,selectedValue){   
+		function handleClick(rightAnswer,selectedValue,radioSelected){   
 	
-		  //if (radioSelected =="true"){
+		  if (radioSelected =="true"){
 		   
-			   if (rightAnswer === selectedValue){
+			   if (rightAnswer == selectedValue){
 					questions.correctAnswers++;
-					console.log("y");
 				}
 
-				else if(rightAnswer !== selectedValue){
+				else {
 					questions.wrongAnswers++;
-					onsole.log("n");
 				}
-		   // }
+		    }
 
-			/*else  {
+			else  {
 
 				questions.unAnswered++;
 
-			}*/
+			}
 
 			
 
@@ -120,27 +118,22 @@ $(document).ready(function () {
 		run();
 
 		$("input[type='radio']").on('change', function () {
-
-			// this is not correct need to assign a class to the radio container and access buttons
-			//through that
 			
-    		$("input[type='radio']:checked").each(function() {
+    		//$("input[type='radio']:checked").each(function() {
         		var idVal = $(this).attr("value");
         		var selectedVal = $(this).attr("id");
         		
-        		//if ($("input[type='radio']:checked") == true){
-        			//var idVal = $(this).attr("value");
-        		   // var selectedVal = $(this).attr("id");
-        			console.log(idVal,selectedVal);
-        			 handleClick(idVal,selectedVal);       			
-        		//} 
-        		
+        		if ($("input[type='radio']:checked") == true){
+        			radioSelected = "true";        			
+        		} 
+        		else{
+        			radioSelected = "false";        			
+        		} 
         		  
-        		 //handleClick(idVal,selectedVal,radioSelected);
+        		 handleClick(idVal,selectedVal,radioSelected);
         		
         		
-        		
-    		});
+    		//});
   
      		
         });
